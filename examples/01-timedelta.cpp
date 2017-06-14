@@ -9,7 +9,6 @@ int main()
     auto x1 = TimeDelta(std::chrono::microseconds(4000), std::chrono::microseconds(1000000));
     std::cout << x1 << std::endl;
 
-    // note: bug with date::months
     auto x2 = TimeDelta(std::chrono::microseconds(2400), std::chrono::seconds(3600 * 25), date::weeks(2));
     std::cout << x2 << std::endl;
 

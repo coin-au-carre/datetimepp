@@ -9,8 +9,6 @@
 
 namespace datetime 
 {
-
-
 // TimeDelta
 // Warning! normalization of negative values is not the same as in Python
 class TimeDelta
@@ -176,9 +174,9 @@ operator<<(std::basic_ostream<CharT, Traits>& os, const DateTime<Duration>& date
 
 
 
-
 // TimeDelta impl
 
+// TODO there is a problem when using date::months
 template <class Duration>
 inline 
 TimeDelta::TimeDelta(const Duration& d) 
@@ -409,7 +407,6 @@ Date operator-(const Date& d, const TimeDelta& td)
 inline
 TimeDelta operator-(const Date& x, const Date& y)
 {
-    // return { date::sys_days(x.year_month_day()) - date::sys_days(y.year_month_day()) };
     return { date::sys_days(x.year_month_day()) - date::sys_days(y.year_month_day()) };
 }
 
@@ -493,28 +490,11 @@ DateTime<Duration>::strptime(const std::string& date_string, const std::string& 
 {
     using namespace std::chrono;
 
-    std::tm t = {};
+    date::local_seconds tp;
     std::istringstream ss(date_string);
-    ss >> std::get_time(&t, format.c_str());
-    if (ss.fail()) 
-    {
-        throw std::runtime_error("Parsing error in DateTime::strptime()");
-    }
-    // Python behaviour differs when t.tm_year < 10
-    // TODO: imitate and to t.tm_year + 2000 in this case? 
-    auto y = t.tm_year + 1900;
-    auto ymd = date::year(y)/(t.tm_mon+1)/t.tm_mday;
-    if (!ymd.ok())
-    {
-        throw std::runtime_error("Invalid date in DateTime::strptime()");
-    }
-
-    std::chrono::system_clock::time_point tp = 
-        date::sys_days(ymd) + hours(t.tm_hour) + minutes(t.tm_min) + seconds(t.tm_sec);
-
-    // TODO: this should be CET
-    return { tp };
-    // return { date::make_zoned(date::current_zone(), tp) };
+    ss >> date::parse(format, tp);
+    auto zt = date::make_zoned(date::current_zone(), tp);
+    return { zt };
 }
 
 
