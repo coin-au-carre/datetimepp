@@ -265,7 +265,6 @@ __Remarks__
 + The C++ version allows an optional `Duration` template parameter which will represents the time precision (e.g. `std::chrono::milliseconds`)
 + The C++ version of `tzinfo` returns a string which is the time zone name
 + `time_zone()` method gives `time_zone*` object from [tz](https://howardhinnant.github.io/date/tz.html#time_zone).
-+ strptime() returns UTC in C++
 
 
 ### To work on
