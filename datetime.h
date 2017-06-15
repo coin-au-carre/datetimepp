@@ -1,6 +1,32 @@
 #ifndef DATETIME_H
 #define DATETIME_H
 
+// The MIT License (MIT)
+//
+// Copyright (c) 2017 Florian Dang
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+// Our apologies.  When the previous paragraph was written, lowercase had not yet
+// been invented (that would involve another several millennia of evolution).
+// We did not mean to shout.
+
 #include "date.h"
 #include "tz.h"
 
@@ -172,6 +198,33 @@ template<class CharT, class Traits, class Duration>
 std::basic_ostream<CharT, Traits>&
 operator<<(std::basic_ostream<CharT, Traits>& os, const DateTime<Duration>& date);
 
+
+
+class Time 
+{
+    date::time_of_day<std::chrono::system_clock::duration> time_of_day_;
+
+public:
+    template<class Duration>
+    Time(const Duration& dur);
+
+    template<class Duration, class ... Durations>
+    Time(const Duration& d, const Durations&... durations);
+
+    const date::time_of_day<std::chrono::system_clock::duration>& time_of_day() const;
+
+private:
+    template<class Duration>
+    Duration add_durations(const Duration& d);
+
+    template<class Duration, class ... Durations>
+    auto add_durations(const Duration& d, const Durations&... durations)
+    -> typename std::common_type<Duration, Durations...>::type;
+};
+
+template<class CharT, class Traits>
+std::basic_ostream<CharT, Traits>&
+operator<<(std::basic_ostream<CharT, Traits>& os, const Time& time);
 
 
 // TimeDelta impl
@@ -636,6 +689,57 @@ std::basic_ostream<CharT, Traits>&
 operator<<(std::basic_ostream<CharT, Traits>& os, const DateTime<Duration>& date)
 {
     return os << date.zoned_time();
+}
+
+
+// Time impl
+
+template <class Duration>
+inline
+Time::Time(const Duration& dur) 
+    : time_of_day_(
+        date::make_time(std::chrono::duration_cast<std::chrono::system_clock::duration>(dur))
+    )
+    {}
+
+
+template<class Duration, class ... Durations>
+inline
+Time::Time(const Duration& d, const Durations& ... durations)
+    : time_of_day_(
+        date::make_time(std::chrono::duration_cast<std::chrono::system_clock::duration>(add_durations(d, durations...)))
+    )
+    {}
+
+
+template<class Duration>
+inline
+Duration Time::add_durations(const Duration& d)
+{
+    return d;
+}
+
+template<class Duration, class ... Durations>
+inline
+auto Time::add_durations(const Duration& d, const Durations& ... durations)
+-> typename std::common_type<Duration, Durations...>::type
+{
+    return d + add_durations(durations...);
+}
+
+
+inline
+const date::time_of_day<std::chrono::system_clock::duration>& Time::time_of_day() const
+{
+    return time_of_day_;
+}
+
+
+template<class CharT, class Traits>
+std::basic_ostream<CharT, Traits>&
+operator<<(std::basic_ostream<CharT, Traits>& os, const Time& time)
+{
+    return os << time.time_of_day();
 }
 
 

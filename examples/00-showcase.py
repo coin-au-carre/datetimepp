@@ -19,7 +19,7 @@ x3 = datetime.now(tz=timezone("Asia/Tehran"));
 print("Time in", x3.tzinfo, "is", x3)
 
 x4 = datetime.strptime("21/11/92 16:30", "%d/%m/%y %H:%M")
-print("Date from strptime is", x4)
+print("datetime from strptime is", x4)
 
 x5 = datetime.utcfromtimestamp(1497252490.0282006);
 print("UTC datetime from timestamp is ", x5, ". Check timestamp back:", x5.timestamp())

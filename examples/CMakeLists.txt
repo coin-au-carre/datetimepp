@@ -10,6 +10,7 @@ set (SOURCES_EXAMPLES
     01-timedelta.cpp
     02-date.cpp
     03-datetime.cpp
+    04-time.cpp
 )
 
 set (TARGETS_EXAMPLES
@@ -17,6 +18,7 @@ set (TARGETS_EXAMPLES
     01-timedelta
     02-date
     03-datetime
+    04-time
 )
 
 foreach( name ${TARGETS_EXAMPLES} )

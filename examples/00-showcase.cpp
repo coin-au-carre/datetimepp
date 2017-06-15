@@ -24,7 +24,7 @@ int main()
     cout << "Time in " << x3.tzinfo() << " is " << x3 << endl;
 
     auto x4 = DateTime<>::strptime("21/11/92 16:30", "%d/%m/%y %H:%M");
-    cout << "datime from strptime is " << x4 << endl;
+    cout << "datetime from strptime is " << x4 << endl;
 
     auto x5 = DateTime<>::utcfromtimestamp(1497252490.0282006);
     std::cout << "UTC datetime from timestamp is " << x5 << ". Check timestamp back: " << x5.timestamp() << std::endl;
