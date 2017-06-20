@@ -19,7 +19,7 @@ int main()
 
     cout << "Here the added result " << x2 + time_delta << endl;
 
-    // The C++ version can allow seconds only precision and can directly take a timezone string
+    // The C++ version can restrict seconds only precision and can directly take a timezone string
     auto x3 = DateTime<std::chrono::seconds>::now("Asia/Tehran");
     cout << "Time in " << x3.tzinfo() << " is " << x3 << endl;
 
@@ -27,7 +27,7 @@ int main()
     cout << "datetime from strptime is " << x4 << endl;
 
     auto x5 = DateTime<>::utcfromtimestamp(1497252490.0282006);
-    std::cout << "UTC datetime from timestamp is " << x5 << ". Check timestamp back: " << x5.timestamp() << std::endl;
+    std::cout << "UTC datetime from timestamp is " << x5 << ". Get timestamp back: " << x5.timestamp() << std::endl;
 
     std::cout << "You can substract two datetimes into a timedelta " << x5 - x4 << std::endl;
 }

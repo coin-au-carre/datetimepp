@@ -11,6 +11,8 @@ int main()
 
     auto t2 = Time(std::chrono::hours(2), date::days(1), std::chrono::seconds(78));
     std::cout << "Time variadic = " << t2 << std::endl;
+
+    std::cout << "isoformat: " << t2.isoformat() << std::endl;
 }
 
 

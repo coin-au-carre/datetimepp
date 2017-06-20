@@ -33,6 +33,8 @@
 #include <iomanip>
 #include <cmath>
 
+#include <iostream>
+
 namespace datetime 
 {
 // TimeDelta
@@ -212,6 +214,13 @@ public:
     Time(const Duration& d, const Durations&... durations);
 
     const date::time_of_day<std::chrono::system_clock::duration>& time_of_day() const;
+
+    std::chrono::hours::rep hour() const;
+    std::chrono::minutes::rep minute() const;
+    std::chrono::seconds::rep seconds() const;
+
+    std::string isoformat() const;
+    std::string strftime(const std::string& format) const;
 
 private:
     template<class Duration>
@@ -734,6 +743,44 @@ const date::time_of_day<std::chrono::system_clock::duration>& Time::time_of_day(
     return time_of_day_;
 }
 
+
+inline
+std::chrono::hours::rep Time::hour() const
+{
+    return time_of_day().hours().count();
+}
+
+inline
+std::chrono::minutes::rep Time::minute() const
+{
+    return time_of_day().minutes().count();
+}
+
+inline
+std::chrono::seconds::rep Time::seconds() const
+{
+    return time_of_day().seconds().count();
+}
+
+
+inline
+std::string Time::isoformat() const
+{
+    return strftime("%H:%M:%S");
+}
+
+inline
+std::string Time::strftime(const std::string& format) const
+{
+    std::tm tm;
+    tm.tm_sec = static_cast<int>(seconds());
+    tm.tm_min = static_cast<int>(minute());
+    tm.tm_hour = static_cast<int>(hour());
+    // no milli nor microseconds :(
+    std::stringstream buffer;
+    buffer << std::put_time(&tm, format.c_str());
+    return buffer.str();
+}
 
 template<class CharT, class Traits>
 std::basic_ostream<CharT, Traits>&

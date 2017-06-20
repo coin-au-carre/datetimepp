@@ -22,6 +22,6 @@ x4 = datetime.strptime("21/11/92 16:30", "%d/%m/%y %H:%M")
 print("datetime from strptime is", x4)
 
 x5 = datetime.utcfromtimestamp(1497252490.0282006);
-print("UTC datetime from timestamp is ", x5, ". Check timestamp back:", x5.timestamp())
+print("UTC datetime from timestamp is ", x5, ". Get timestamp back:", x5.timestamp())
 
 print("You can substract two datetimes into a timedelta", x5 - x4)
