@@ -120,6 +120,8 @@ Date operator+(const TimeDelta& td, const Date& d);
 Date operator-(const Date& d, const TimeDelta& td);
 TimeDelta operator-(const Date& x, const Date& y);
 
+bool operator==(const Date& x, const Date& y);
+
 template<class CharT, class Traits>
 std::basic_ostream<CharT, Traits>&
 operator<<(std::basic_ostream<CharT, Traits>& os, const Date& date);
@@ -471,6 +473,13 @@ TimeDelta operator-(const Date& x, const Date& y)
 {
     return { date::sys_days(x.year_month_day()) - date::sys_days(y.year_month_day()) };
 }
+
+inline
+bool operator==(const Date& x, const Date& y)
+{
+    return x.year_month_day() == y.year_month_day();
+}
+
 
 template<class CharT, class Traits>
 inline
