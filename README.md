@@ -1,11 +1,11 @@
 datetime ++
 ===========
 
-An attempt to port [Python Datetime](https://docs.python.org/3/library/datetime.html) in C++.
+An attempt to port [Python Datetime](https://docs.python.org/3/library/datetime.html) in C++. Finally easy datetime management in C++ ! 
 
 It consists of a header-only file [datetime.h](/datetime.h) which relies on [Howard Hinnant's date libraries](https://github.com/HowardHinnant/date), precisely [date](https://howardhinnant.github.io/date/date.html) and [tz](https://howardhinnant.github.io/date/tz.html).
 
-This is an ongoing work! So expect mistakes for the moment and changes.
+This is an ongoing work! So expect mistakes for the moment and changes. 
 
 
 ### A little showcase
@@ -37,7 +37,7 @@ std::cout << "UTC datetime from timestamp is " << x5 << ". Check timestamp back:
 std::cout << "You can substract two datetimes into a timedelta " << x5 - x4 << std::endl;
 ```
 
-will output 
+outputs for me: 
 
 > Today's date is 2017-06-14  
 > Today's datetime is 2017-06-14 10:12:35.651158550 CEST  
@@ -270,7 +270,7 @@ __Remarks__
 ### To work on
 
 * Time class
-* Add Tests
+* Tests
 * Constexpr compile time possibilities
 * No exception safety?
 

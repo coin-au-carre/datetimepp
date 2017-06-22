@@ -22,9 +22,9 @@ using namespace datetime;
 CASE("basic" "[date]") 
 {
     auto d = Date(date::year(2017)/6/21);
-    EXPECT(d.day() == date::day(21));
-    EXPECT(d.month() == date::month(6));
-    EXPECT(d.year() == date::year(2017));
+    EXPECT(d.day()      == date::day(21));
+    EXPECT(d.month()    == date::month(6));
+    EXPECT(d.year()     == date::year(2017));
 }
 
 

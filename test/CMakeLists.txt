@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 2.8)
 
 project(datetime-test)
 
+find_package(CURL)
+include_directories(${CURL_INCLUDE_DIRS})
 
 set (SRC_FILES 
     run_test.cpp
     date_test.cpp
+    datetime_test.cpp
+    ../date/tz.cpp
 )
 
 set(HEADER_DIRS ${PROJECT_SOURCE_DIR}/..)

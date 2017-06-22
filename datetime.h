@@ -420,16 +420,19 @@ std::string Date::ctime() const
     return strftime("%c");
 }
 
+inline
 date::weekday Date::objweekday() const
 {
     return date::weekday(ymd_);
 }
 
+inline
 unsigned Date::weekday() const
 {
     return (static_cast<unsigned>(objweekday()) - 1) % 7; // can do better
 }
 
+inline
 unsigned Date::isoweekday() const
 {
     return 1 + weekday();

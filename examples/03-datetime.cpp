@@ -20,12 +20,12 @@ int main()
     std::cout << "x2.utcoffset() = " << x2.utcoffset() << std::endl;
 
     auto x3 = DateTime<>::fromtimestamp(1497252490.0282006);
-    std::cout << x3 << std::endl;
-    std::cout << x3.tzinfo() << std::endl;
-    std::cout << "timestamp() = " << x3.timestamp() << std::endl;
+    std::cout << "fromtimestamp(1497252490.0282006) = " << x3 << std::endl;
+    std::cout << "fromtimestamp(1497252490.0282006).tzinfo() = " << x3.tzinfo() << std::endl;
+    std::cout << "fromtimestamp(1497252490.0282006).timestamp() = " << x3.timestamp() << std::endl;
 
     auto x4 = DateTime<>::utcfromtimestamp(1497252490.0282006);
-    std::cout << x4 << std::endl;
+    std::cout << "utcfromtimestamp(1497252490.0282006) = " << x4 << std::endl;
 
     auto x5 = DateTime<>::strptime("21/11/06 16:30", "%d/%m/%y %H:%M");
     std::cout << x5 << std::endl;
