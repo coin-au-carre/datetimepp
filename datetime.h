@@ -308,7 +308,7 @@ TimeDelta operator-(const TimeDelta& x, const TimeDelta& y)
 }
 
 // float
-template<class Scalar, typename std::enable_if<std::is_floating_point<Scalar>::value>::type* = nullptr>
+template<class Scalar, typename std::enable_if<std::is_floating_point<Scalar>::value>::type*>
 inline
 TimeDelta operator*(Scalar s, const TimeDelta& x)
 {
@@ -320,7 +320,7 @@ TimeDelta operator*(Scalar s, const TimeDelta& x)
 }
 
 // integer
-template<class Scalar, typename std::enable_if<std::is_integral<Scalar>::value>::type* = nullptr>
+template<class Scalar, typename std::enable_if<std::is_integral<Scalar>::value>::type*>
 inline
 TimeDelta operator*(Scalar s, const TimeDelta& x)
 {
@@ -332,14 +332,14 @@ TimeDelta operator*(Scalar s, const TimeDelta& x)
     };
 }
 
-template<class Scalar, typename std::enable_if<std::is_floating_point<Scalar>::value>::type* = nullptr>
+template<class Scalar, typename std::enable_if<std::is_floating_point<Scalar>::value>::type*>
 inline
 TimeDelta operator*(const TimeDelta& x, Scalar s)
 {
     return s * x;
 }
 
-template<class Scalar, typename std::enable_if<std::is_integral<Scalar>::value>::type* = nullptr>
+template<class Scalar, typename std::enable_if<std::is_integral<Scalar>::value>::type*>
 inline
 TimeDelta operator*(const TimeDelta& x, Scalar s)
 {
